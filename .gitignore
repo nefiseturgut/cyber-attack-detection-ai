@@ -1,0 +1,27 @@
+# Virtual environment
+.venv/
+
+# Datasets (BIG FILES)
+datasets/
+processed_data*/
+lstm_data*/
+*.npy
+*.csv
+*.pkl
+*TrafficForML*.csv
+
+# Trained models
+models/
+
+# Outputs & logs
+outputs/
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db

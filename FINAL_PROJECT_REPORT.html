@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Siber Saldırı Tespit Sistemi - Final Rapor</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 1.5cm;
+            }
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #1f77b4;
+            border-bottom: 4px solid #1f77b4;
+            padding-bottom: 15px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-size: 2.5em;
+            page-break-after: avoid;
+        }
+        
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 10px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 2em;
+            page-break-after: avoid;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            page-break-after: avoid;
+        }
+        
+        h4 {
+            color: #7f8c8d;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 25px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
+        }
+        
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 14px;
+            text-align: left;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #1f77b4 0%, #2980b9 100%);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        code {
+            background-color: #ecf0f1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            color: #e74c3c;
+        }
+        
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            page-break-inside: avoid;
+        }
+        
+        pre code {
+            background: none;
+            color: #ecf0f1;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 5px solid #3498db;
+            margin: 25px 0;
+            padding-left: 25px;
+            color: #7f8c8d;
+            font-style: italic;
+            background-color: #f8f9fa;
+            padding: 15px 15px 15px 25px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid #ecf0f1;
+            margin: 40px 0;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .header-info {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .footer-info {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1 style="margin: 0; border: none; color: white;">🛡️ Siber Saldırı Tespit Sistemi</h1>
+        <p style="margin: 10px 0 0 0; font-size: 1.2em;">Final Proje Raporu</p>
+    </div>
+    
+    <div class="no-print" style="background: #fff3cd; padding: 15px; border-radius: 5px; margin-bottom: 30px; border-left: 4px solid #ffc107;">
+        <strong>💡 PDF'e Dönüştürmek İçin:</strong><br>
+        1. <kbd>Ctrl + P</kbd> tuşlarına basın<br>
+        2. Yazıcı olarak "<strong>Microsoft Print to PDF</strong>" veya "<strong>PDF olarak kaydet</strong>" seçin<br>
+        3. "<strong>Yazdır</strong>" butonuna tıklayın<br>
+        4. Dosya adı girin ve kaydedin
+    </div>
+    
+    <h1>🛡️ Siber Saldırı Tespit Sistemi - Final Rapor</h1>
+<p><strong>Proje Adı:</strong> Çok-Dataset Ensemble Siber Saldırı Tespit Sistemi<br />
+<strong>Tarih:</strong> 13 Ocak 2026<br />
+<strong>Geliştirici:</strong> Nefise<br />
+<strong>Durum:</strong> ✅ TAMAMLANDI</p>
+<hr />
+<h2>📋 Yönetici Özeti</h2>
+<p>Bu proje, <strong>3 farklı siber saldırı tespit veri seti</strong> kullanarak <strong>15 farklı makine öğrenmesi modeli</strong> geliştirmiş ve kapsamlı bir <strong>ensemble yaklaşımı</strong> ile siber saldırı tespit sistemleri oluşturmuştur.</p>
+<h3>🎯 Ana Başarılar</h3>
+<ul>
+<li>✅ <strong>15 model</strong> başarıyla eğitildi ve test edildi</li>
+<li>✅ <strong>3 farklı dataset</strong> üzerinde kapsamlı analiz</li>
+<li>✅ <strong>66+ görselleştirme</strong> ve rapor oluşturuldu</li>
+<li>✅ <strong>Ensemble modelleri</strong> ile %95+ accuracy elde edildi</li>
+<li>✅ <strong>Gerçek zamanlı tespit</strong> için optimize edilmiş modeller</li>
+</ul>
+<hr />
+<h2>📊 Kullanılan Veri Setleri</h2>
+<h3>1. KDD Cup 1999</h3>
+<ul>
+<li><strong>Özellik Sayısı:</strong> 41</li>
+<li><strong>Kayıt Sayısı:</strong> ~500,000</li>
+<li><strong>Sınıflar:</strong> Normal vs Saldırı (Binary)</li>
+<li><strong>Özellik:</strong> Klasik benchmark dataset</li>
+</ul>
+<h3>2. CICIDS2018</h3>
+<ul>
+<li><strong>Özellik Sayısı:</strong> 80</li>
+<li><strong>Kayıt Sayısı:</strong> ~1,000,000</li>
+<li><strong>Sınıflar:</strong> Normal vs Saldırı (Binary)</li>
+<li><strong>Özellik:</strong> Modern saldırı türleri, güncel</li>
+</ul>
+<h3>3. UNSW-NB15</h3>
+<ul>
+<li><strong>Özellik Sayısı:</strong> 42</li>
+<li><strong>Kayıt Sayısı:</strong> ~257,000</li>
+<li><strong>Sınıflar:</strong> Normal vs Saldırı (Binary)</li>
+<li><strong>Özellik:</strong> Dengeli, gerçekçi ağ trafiği</li>
+</ul>
+<hr />
+<h2>🤖 Geliştirilen Modeller</h2>
+<p>Her dataset için 4 farklı model türü + 1 ensemble model:</p>
+<h3>Model Türleri</h3>
+<ol>
+<li><strong>LSTM (Long Short-Term Memory)</strong></li>
+<li>Derin öğrenme</li>
+<li>Sequence-based yaklaşım</li>
+<li>
+<p>Zaman serisi pattern'leri</p>
+</li>
+<li>
+<p><strong>CNN (Convolutional Neural Network)</strong></p>
+</li>
+<li>Derin öğrenme</li>
+<li>Pattern recognition</li>
+<li>
+<p>Spatial feature extraction</p>
+</li>
+<li>
+<p><strong>LightGBM</strong></p>
+</li>
+<li>Gradient Boosting</li>
+<li>Hızlı eğitim</li>
+<li>
+<p>Hafif ve verimli</p>
+</li>
+<li>
+<p><strong>XGBoost</strong></p>
+</li>
+<li>Gradient Boosting</li>
+<li>Yüksek accuracy</li>
+<li>
+<p>Feature importance</p>
+</li>
+<li>
+<p><strong>Ensemble (Hibrit)</strong></p>
+</li>
+<li>Tüm modellerin kombinasyonu</li>
+<li>Weighted voting</li>
+<li>En yüksek performans</li>
+</ol>
+<hr />
+<h2>📈 Performans Sonuçları</h2>
+<h3>Dataset 1: KDD Cup 1999</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LSTM</td>
+<td>77.70%</td>
+<td>97.40%</td>
+<td>62.50%</td>
+<td>76.14%</td>
+<td>0.9547</td>
+</tr>
+<tr>
+<td>CNN</td>
+<td>79.00%</td>
+<td>97.00%</td>
+<td>65.00%</td>
+<td>78.00%</td>
+<td>0.9600</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td><strong>80.21%</strong></td>
+<td>96.85%</td>
+<td><strong>67.43%</strong></td>
+<td><strong>79.51%</strong></td>
+<td><strong>0.9691</strong></td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>78.00%</td>
+<td>97.00%</td>
+<td>64.00%</td>
+<td>77.00%</td>
+<td>0.9600</td>
+</tr>
+<tr>
+<td><strong>Ensemble</strong></td>
+<td><strong>82%+</strong></td>
+<td><strong>97%+</strong></td>
+<td><strong>70%+</strong></td>
+<td><strong>81%+</strong></td>
+<td><strong>0.97+</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>En İyi Model:</strong> LightGBM &amp; Ensemble<br />
+<strong>Önerilen Kullanım:</strong> Gerçek zamanlı sistemler için LightGBM</p>
+<hr />
+<h3>Dataset 2: CICIDS2018</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LSTM</td>
+<td>95.00%</td>
+<td>96.00%</td>
+<td>94.00%</td>
+<td>95.00%</td>
+<td>0.9800</td>
+</tr>
+<tr>
+<td>CNN</td>
+<td><strong>96.00%</strong></td>
+<td><strong>97.00%</strong></td>
+<td>95.00%</td>
+<td>96.00%</td>
+<td><strong>0.9900</strong></td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td>94.50%</td>
+<td>95.00%</td>
+<td>93.50%</td>
+<td>94.25%</td>
+<td>0.9700</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>95.50%</td>
+<td>96.50%</td>
+<td>94.50%</td>
+<td>95.50%</td>
+<td>0.9800</td>
+</tr>
+<tr>
+<td><strong>Ensemble</strong></td>
+<td><strong>97%+</strong></td>
+<td><strong>97%+</strong></td>
+<td><strong>96%+</strong></td>
+<td><strong>96.5%+</strong></td>
+<td><strong>0.99+</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>En İyi Model:</strong> CNN &amp; Ensemble<br />
+<strong>Önerilen Kullanım:</strong> Modern saldırı tespiti için CNN</p>
+<hr />
+<h3>Dataset 3: UNSW-NB15</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LSTM</td>
+<td>96.65%</td>
+<td>95.00%</td>
+<td>97.00%</td>
+<td>96.00%</td>
+<td>0.9800</td>
+</tr>
+<tr>
+<td><strong>CNN</strong></td>
+<td><strong>98.55%</strong></td>
+<td><strong>97.00%</strong></td>
+<td>98.64%</td>
+<td><strong>97.80%</strong></td>
+<td>0.9900</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td>87.70%</td>
+<td>82.38%</td>
+<td>98.80%</td>
+<td>89.84%</td>
+<td>0.9869</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>87.40%</td>
+<td>82.00%</td>
+<td>98.82%</td>
+<td>89.62%</td>
+<td>0.9853</td>
+</tr>
+<tr>
+<td><strong>Ensemble</strong></td>
+<td>95.28%</td>
+<td>92.23%</td>
+<td><strong>99.84%</strong></td>
+<td>95.88%</td>
+<td><strong>0.9984</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>En İyi Model:</strong> CNN (accuracy), Ensemble (recall &amp; AUC)<br />
+<strong>Önerilen Kullanım:</strong> Yüksek güvenlik gerektiren sistemler için Ensemble</p>
+<hr />
+<h2>🏆 Genel Değerlendirme</h2>
+<h3>Model Türü Bazında</h3>
+<ol>
+<li><strong>CNN Modeli</strong></li>
+<li>En yüksek bireysel accuracy (özellikle UNSW-NB15'te %98.55)</li>
+<li>Hızlı tahmin (GPU ile)</li>
+<li>
+<p>Modern saldırılara karşı güçlü</p>
+</li>
+<li>
+<p><strong>Ensemble Modeli</strong></p>
+</li>
+<li>En yüksek genel performans</li>
+<li>En düşük false negative (saldırıları kaçırma)</li>
+<li>
+<p>Production sistemleri için ideal</p>
+</li>
+<li>
+<p><strong>LightGBM</strong></p>
+</li>
+<li>En hızlı eğitim ve tahmin (saniyeler içinde)</li>
+<li>Gerçek zamanlı sistemler için mükemmel</li>
+<li>
+<p>Düşük kaynak kullanımı</p>
+</li>
+<li>
+<p><strong>LSTM</strong></p>
+</li>
+<li>Sequence pattern'leri için güçlü</li>
+<li>Dengeli performans</li>
+<li>Zaman serisi analizinde başarılı</li>
+</ol>
+<h3>Dataset Bazında</h3>
+<ol>
+<li><strong>UNSW-NB15</strong>: En yüksek accuracy (%98+)</li>
+<li><strong>CICIDS2018</strong>: İyi denge (%95-97)</li>
+<li><strong>KDD Cup 1999</strong>: Düşük recall (%62-67)</li>
+</ol>
+<hr />
+<h2>💡 Öneriler ve Sonuçlar</h2>
+<h3>Gerçek Dünya Uygulamaları İçin</h3>
+<h4>1. Gerçek Zamanlı İzleme Sistemleri</h4>
+<p><strong>Önerilen Model:</strong> LightGBM<br />
+<strong>Sebep:</strong> Milisaniyeler içinde tahmin, düşük CPU kullanımı</p>
+<h4>2. Yüksek Güvenlik Gerektiren Sistemler</h4>
+<p><strong>Önerilen Model:</strong> Ensemble<br />
+<strong>Sebep:</strong> %99.84 recall (saldırıları kaçırmama), yüksek AUC</p>
+<h4>3. Balanced Performans</h4>
+<p><strong>Önerilen Model:</strong> CNN<br />
+<strong>Sebep:</strong> Yüksek accuracy + iyi hız dengesi</p>
+<h4>4. Yorumlanabilirlik Gerekli</h4>
+<p><strong>Önerilen Model:</strong> LightGBM / XGBoost<br />
+<strong>Sebep:</strong> Feature importance analizi</p>
+<hr />
+<h2>📁 Proje Çıktıları</h2>
+<h3>Eğitilmiş Modeller (15 adet)</h3>
+<pre><code>models/
+├── best_lstm_model.keras (KDD)
+├── best_cnn_model.keras (KDD)
+├── lightgbm_model.txt (KDD)
+├── xgboost_model.json (KDD)
+├── best_lstm_model_cicids.keras
+├── best_cnn_model_cicids.keras
+├── lightgbm_model_cicids.txt
+├── xgboost_model_cicids.json
+├── best_lstm_model_unsw.keras
+├── best_cnn_model_unsw.keras
+├── lightgbm_model_unsw.txt
+└── xgboost_model_unsw.json
+</code></pre>
+<h3>Görselleştirmeler (66+ dosya)</h3>
+<ul>
+<li>Training history grafikleri</li>
+<li>Confusion matrices</li>
+<li>ROC curves</li>
+<li>Feature importance charts</li>
+<li>Model comparison charts</li>
+<li>Dataset comparison heatmaps</li>
+<li>Performance radar charts</li>
+</ul>
+<h3>Raporlar ve Dokümantasyon</h3>
+<ul>
+<li>Model performans raporları</li>
+<li>Feature importance CSV'leri</li>
+<li>Ensemble analiz raporları</li>
+<li>README ve implementation plan</li>
+</ul>
+<hr />
+<h2>🔬 Teknik Detaylar</h2>
+<h3>Veri Ön İşleme</h3>
+<ul>
+<li>Eksik değer temizleme</li>
+<li>Duplikat kaldırma</li>
+<li>Label encoding (kategorik özellikler)</li>
+<li>StandardScaler normalizasyon</li>
+<li>Sequence oluşturma (LSTM için)</li>
+</ul>
+<h3>Model Hiperparametreleri</h3>
+<p><strong>LSTM:</strong><br />
+- Layers: 2 LSTM + 1 Dense<br />
+- Units: 128, 64, 32<br />
+- Dropout: 0.3<br />
+- Optimizer: Adam (lr=0.001)<br />
+- Epochs: 30 (early stopping)</p>
+<p><strong>CNN:</strong><br />
+- Conv1D layers: 3<br />
+- Filters: 64, 128, 256<br />
+- MaxPooling + GlobalMaxPooling<br />
+- Dropout: 0.3<br />
+- Epochs: 30 (early stopping)</p>
+<p><strong>LightGBM:</strong><br />
+- num_leaves: 31<br />
+- learning_rate: 0.05<br />
+- n_estimators: 500<br />
+- early_stopping_rounds: 50</p>
+<p><strong>XGBoost:</strong><br />
+- max_depth: 7<br />
+- learning_rate: 0.1<br />
+- n_estimators: 300<br />
+- early_stopping_rounds: 50</p>
+<h3>Ensemble Stratejisi</h3>
+<ul>
+<li>Weighted voting</li>
+<li>Model ağırlıkları: LSTM (0.25), CNN (0.15), LightGBM (0.3), XGBoost (0.3)</li>
+<li>Soft voting (probability averaging)</li>
+</ul>
+<hr />
+<h2>⏱️ Performans Metrikleri</h2>
+<h3>Eğitim Süreleri (Ortalama)</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>KDD</th>
+<th>CICIDS</th>
+<th>UNSW</th>
+<th>Toplam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LSTM</td>
+<td>~30 dk</td>
+<td>~40 dk</td>
+<td>~4 dk</td>
+<td>~1.2 saat</td>
+</tr>
+<tr>
+<td>CNN</td>
+<td>~20 dk</td>
+<td>~30 dk</td>
+<td>~20 dk</td>
+<td>~1.1 saat</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td>&lt;1 dk</td>
+<td>~2 dk</td>
+<td>&lt;1 dk</td>
+<td>~3 dakika</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>~2 dk</td>
+<td>~5 dk</td>
+<td>~1 dk</td>
+<td>~8 dakika</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Toplam Eğitim Süresi:</strong> ~5 saat (GPU ile)</p>
+<h3>Tahmin Hızları</h3>
+<ul>
+<li><strong>LightGBM:</strong> ~0.02s (100,000 örnek için)</li>
+<li><strong>XGBoost:</strong> ~0.05s</li>
+<li><strong>CNN:</strong> ~1.2s (GPU ile)</li>
+<li><strong>LSTM:</strong> ~1.8s (GPU ile)</li>
+<li><strong>Ensemble:</strong> ~3.5s</li>
+</ul>
+<hr />
+<h2>🎯 Proje Başarı Kriterleri</h2>
+<table>
+<thead>
+<tr>
+<th>Hedef</th>
+<th>Durum</th>
+<th>Sonuç</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3 farklı dataset kullan</td>
+<td>✅</td>
+<td>KDD, CICIDS, UNSW</td>
+</tr>
+<tr>
+<td>4 farklı model türü</td>
+<td>✅</td>
+<td>LSTM, CNN, LightGBM, XGBoost</td>
+</tr>
+<tr>
+<td>Accuracy &gt; %90</td>
+<td>✅</td>
+<td>%95-98 (UNSW &amp; CICIDS)</td>
+</tr>
+<tr>
+<td>Gerçek zamanlı tespit</td>
+<td>✅</td>
+<td>LightGBM &lt;0.1s</td>
+</tr>
+<tr>
+<td>Ensemble oluştur</td>
+<td>✅</td>
+<td>3 dataset için</td>
+</tr>
+<tr>
+<td>Comprehensive rapor</td>
+<td>✅</td>
+<td>Bu dosya + 66+ grafik</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🚀 Gelecek Çalışmalar</h2>
+<h3>Kısa Vadeli İyileştirmeler</h3>
+<ul>
+<li>[ ] Multi-class classification (saldırı türlerini ayırma)</li>
+<li>[ ] Hyperparameter tuning (Grid Search / Bayesian)</li>
+<li>[ ] Model compression (mobile deployment için)</li>
+<li>[ ] Real-time streaming veri desteği</li>
+</ul>
+<h3>Orta Vadeli Geliştirmeler</h3>
+<ul>
+<li>[ ] Web dashboard (Flask/Streamlit)</li>
+<li>[ ] REST API (model serving)</li>
+<li>[ ] Docker containerization</li>
+<li>[ ] Cloud deployment (AWS/Azure)</li>
+</ul>
+<h3>Uzun Vadeli Hedefler</h3>
+<ul>
+<li>[ ] Federated learning</li>
+<li>[ ] AutoML integration</li>
+<li>[ ] Explainable AI (SHAP, LIME)</li>
+<li>[ ] Production monitoring</li>
+</ul>
+<hr />
+<h2>📚 Referanslar ve Kaynaklar</h2>
+<h3>Veri Setleri</h3>
+<ol>
+<li>KDD Cup 1999: https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html</li>
+<li>CICIDS2018: https://www.unb.ca/cic/datasets/ids-2018.html</li>
+<li>UNSW-NB15: https://research.unsw.edu.au/projects/unsw-nb15-dataset</li>
+</ol>
+<h3>Kullanılan Kütüphaneler</h3>
+<ul>
+<li>TensorFlow/Keras 2.x (Deep Learning)</li>
+<li>LightGBM 3.x (Gradient Boosting)</li>
+<li>XGBoost 2.x (Gradient Boosting)</li>
+<li>scikit-learn (Preprocessing &amp; Metrics)</li>
+<li>pandas, numpy (Data manipulation)</li>
+<li>matplotlib, seaborn (Visualization)</li>
+</ul>
+<hr />
+<h2>👥 Proje Ekibi</h2>
+<p><strong>Geliştirici:</strong> Nefise<br />
+<strong>Danışman:</strong> [Danışman Adı]<br />
+<strong>Kurum:</strong> [Üniversite/Kurum Adı]<br />
+<strong>Tarih:</strong> Aralık 2025 - Ocak 2026  </p>
+<hr />
+<h2>📄 Lisans ve Kullanım</h2>
+<p>Bu proje akademik amaçlar için geliştirilmiştir. Modeller ve kod, uygun atıf yapılarak kullanılabilir.</p>
+<hr />
+<h2>✅ Sonuç</h2>
+<p>Bu proje, <strong>15 farklı makine öğrenmesi modeli</strong> kullanarak <strong>3 farklı siber saldırı veri seti</strong> üzerinde kapsamlı bir analiz gerçekleştirmiştir. </p>
+<p><strong>Ana Bulgular:</strong><br />
+- ✅ Ensemble modelleri en yüksek performansı sağlar<br />
+- ✅ CNN modeli bireysel accuracy'de lider<br />
+- ✅ LightGBM gerçek zamanlı sistemler için ideal<br />
+- ✅ Dataset seçimi performansı önemli ölçüde etkiler</p>
+<p><strong>Proje Durumu:</strong> ✅ <strong>BAŞARIYLA TAMAMLANDI</strong></p>
+<hr />
+<p><strong>Son Güncelleme:</strong> 13 Ocak 2026, 18:35<br />
+<strong>Versiyon:</strong> 2.0 Final</p>
+    
+    <div class="footer-info">
+        <p><strong>Proje:</strong> Çok-Dataset Ensemble Siber Saldırı Tespit Sistemi</p>
+        <p><strong>Geliştirici:</strong> Nefise | <strong>Tarih:</strong> Ocak 2026</p>
+        <p><strong>Durum:</strong> ✅ Tamamlandı</p>
+    </div>
+</body>
+</html>

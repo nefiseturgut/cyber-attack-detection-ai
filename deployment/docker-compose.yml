@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # API Server
+  api:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    container_name: cyber_attack_api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../models:/app/models:ro  # Read-only model dosyaları
+    environment:
+      - FLASK_ENV=production
+      - MODEL_PATH=/app/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - cyber_net
+
+  # Nginx Reverse Proxy (Opsiyonel - Production için)
+  nginx:
+    image: nginx:alpine
+    container_name: cyber_attack_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+    networks:
+      - cyber_net
+
+networks:
+  cyber_net:
+    driver: bridge
