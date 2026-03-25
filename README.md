@@ -361,9 +361,9 @@ Bu proje akademik amaçlar için geliştirilmiştir. Uygun atıf yapılarak kull
 ## 📞 İletişim
 
 Proje hakkında sorularınız için:
-- 📧 Email: [email-adresiniz]
-- 🔗 LinkedIn: [linkedin-profiliniz]
-- 📁 GitHub: [github-profiliniz]
+- 📧 Email: nefiseturgut60@gmail.com
+- 🔗 LinkedIn: Nefise Turgut
+- 📁 GitHub: nefiseturgut
 
 ---
 
@@ -372,7 +372,6 @@ Proje hakkında sorularınız için:
 Bu projeyi beğendiyseniz yıldız vermeyi unutmayın! ⭐
 
 ---
-
-**Son Güncelleme:** 25 Mart 2026  
-**Versiyon:** 2.1 Final  
-**Durum:** ✅ Tamamlandı
+  
+**Versiyon:** 2.1   
+**Durum:** ✅ Devam Ediyor
