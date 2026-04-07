@@ -1,0 +1,39 @@
+================================================================================
+MODEL KARŞILAŞTIRMA RAPORU: LSTM vs LightGBM
+================================================================================
+
+📊 PERFORMANS ÖZETİ
+--------------------------------------------------------------------------------
+
+LSTM Modeli:
+  Accuracy:  77.70%
+  Precision: 97.40%
+  Recall:    62.50%
+  F1-Score:  76.14%
+  AUC:       0.9547
+
+LightGBM Modeli:
+  Accuracy:  80.21%
+  Precision: 96.85%
+  Recall:    67.43%
+  F1-Score:  79.51%
+  AUC:       0.9691
+
+⚡ HIZ KARŞILAŞTIRMASI
+--------------------------------------------------------------------------------
+LSTM Tahmin Süresi:     1.86 saniye
+LightGBM Tahmin Süresi: 0.02 saniye
+Hız Farkı: LightGBM 100.7x daha hızlı
+
+💡 SONUÇ VE ÖNERİLER
+--------------------------------------------------------------------------------
+✅ LightGBM, accuracy açısından daha iyi performans gösteriyor.
+⚡ LightGBM, tahmin hızında önemli ölçüde daha hızlı.
+
+📌 Kullanım Önerileri:
+  - Yüksek doğruluk gerekiyorsa: LSTM kullanın
+  - Hızlı tahmin gerekiyorsa: LightGBM kullanın
+  - Gerçek zamanlı sistemler için: LightGBM önerilir
+  - Sequence pattern'leri önemliyse: LSTM önerilir
+
+================================================================================

@@ -1,0 +1,17 @@
+
+UNSW-NB15 - ENSEMBLE MODEL RAPORU
+================================================================================
+Tarih: 2026-01-13 18:31:15
+
+Performans:
+  Accuracy:  95.28%
+  Precision: 92.23%
+  Recall:    99.84%
+  F1-Score:  95.88%
+  AUC:       0.9984
+
+Model Agirliklari:
+  LSTM: 25%
+  LightGBM: 30%
+  XGBoost: 30%
+  CNN: 15%

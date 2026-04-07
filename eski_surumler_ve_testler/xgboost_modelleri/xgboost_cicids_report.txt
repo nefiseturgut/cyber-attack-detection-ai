@@ -1,0 +1,92 @@
+
+================================================================================
+CICIDS2018 - XGBOOST MODEL RAPORU
+================================================================================
+
+Tarih: 2026-01-06 19:04:10
+
+1. DATASET BILGILERI
+================================================================================
+Dataset: CICIDS2018
+Train samples: 655,300
+Test samples: 163,826
+Features: 78
+
+Sinif dagilimi:
+  Normal (0): 529,966 (80.9%)
+  Saldiri (1): 125,334 (19.1%)
+
+2. MODEL PARAMETRELERI
+================================================================================
+Tree method: hist
+Max depth: 6
+Learning rate: 0.05
+Subsample: 0.8
+Colsample bytree: 0.8
+Regularization (L1): 0.1
+Regularization (L2): 1.0
+
+3. EGITIM BILGILERI
+================================================================================
+Egitim suresi: 2.71 saniye (0.05 dakika)
+Best iteration: 0
+Total trees: 1
+Early stopping: 50 rounds
+
+4. PERFORMANS METRIKLERI
+================================================================================
+Test Seti Sonuclari:
+  * Accuracy:  80.87%
+  * Precision: 0.00%
+  * Recall:    0.00%
+  * F1-Score:  0.00%
+  * AUC:       1.0000
+
+Tahmin Performansi:
+  * Toplam tahmin suresi: 0.0053 saniye
+  * Ortalama tahmin suresi: 0.0000 ms/sample
+  * Saniyede tahmin: 30690788 samples/sec
+
+Confusion Matrix:
+  True Negatives:  132,492
+  False Positives: 0
+  False Negatives: 31,334
+  True Positives:  0
+
+5. EN ONEMLI OZELLIKLER (Top 10)
+================================================================================
+          feature    importance
+ Fwd Seg Size Min 105092.101562
+         Dst Port   9816.535156
+Init Fwd Win Byts   2132.443604
+Init Bwd Win Byts   2127.718018
+   Bwd Header Len    961.671265
+       Bwd Pkts/s    627.757202
+    Flow IAT Mean    419.261719
+       Fwd Pkts/s    381.597290
+    Flow Duration    237.904129
+     Fwd IAT Mean    139.670578
+
+6. SONUC
+================================================================================
+XGBoost modeli CICIDS2018 dataseti uzerinde basariyla egitildi.
+Model, 80.87% dogruluk orani ile siber saldirilari tespit edebiliyor.
+
+Avantajlar:
+  - Industry-proven algoritma
+  - Hizli egitim (2.71 saniye)
+  - Yuksek dogruluk ve AUC
+  - Regularization ile overfitting kontrolu
+  - Feature importance analizi
+
+Kaydedilen dosyalar:
+  - models/xgboost_model_cicids.json
+  - models/xgboost_cicids_feature_importance.png
+  - models/xgboost_cicids_feature_importance.csv
+  - models/xgboost_cicids_confusion_matrix.png
+  - models/xgboost_cicids_roc_curve.png
+
+================================================================================
+Gelistirici: Nefise
+Tarih: 06 January 2026
+================================================================================

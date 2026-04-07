@@ -1,6 +1,6 @@
 # 🚀 Siber Saldırı Tespit Sistemi - İleri Aşama Yol Haritası (Roadmap)
 
-Bu doküman, makine öğrenmesi modelleri geliştirildikten sonra projenin **Gerçek Zamanlı Simülasyon ve İzleme** aşamasına geçişi için hazırlanmış adım adım bir plandır.
+Bu doküman, makine öğrenmesi modelleri (CNN, LSTM, LightGBM) optimize edildikten sonra projenin **Gerçek Zamanlı Simülasyon ve İzleme** aşamasına geçişi için hazırlanmış adım adım bir plandır.
 
 ---
 
@@ -8,7 +8,7 @@ Bu doküman, makine öğrenmesi modelleri geliştirildikten sonra projenin **Ger
 
 - [ ] **Daha Fazla Epoch ile Eğitim**: Ağır modellerin (LSTM, CNN) iterasyon (epoch) sayılarını artırarak over-fitting (aşırı öğrenme) engellenerek gerçeğe en yakın değerlere ulaşılması.
 - [ ] **Hiperparametre Optimizasyonu**: Özellik seçimi (feature selection) ve hiperparametre ayarlamalarıyla modellerin gerçek zamanlı trafikte daha stabil çalışmasının sağlanması.
-- [ ] **Model Dışa Aktarımı**: Modellerin canlı dinleme sistemine (monitoring) hızlı cevap verebilmesi için en verimli formatta (.keras, .pkl) pipeline'a hazır hale getirilmesi.
+- [ ] **Model Dışa Aktarımı**: Modellerin canlı dinleme sistemine (monitoring) hızlı cevap verebilmesi için en verimli formatta (.keras, .txt) pipeline'a hazır hale getirilmesi.
 
 ---
 
@@ -25,8 +25,8 @@ Bu doküman, makine öğrenmesi modelleri geliştirildikten sonra projenin **Ger
 ## ⚔️ Aşama 3: Saldırı Senaryoları ve Canlı Trafik Analizi
 
 - [ ] **Saldırıların Simüle Edilmesi**: Saldırgan makineden Nmap taramaları, DoS/DDoS (hping3 vb.), kaba kuvvet (brute-force) gibi hareketliliklerin başlatılması.
-- [ ] **Gerçek Zamanlı Trafik Dönüşümü**: Yakalanan pcap (paket) dosyalarının canlı olarak Python içerisinde parse edilmesi ve **CICFlowMeter** benzeri bir script kullanılarak modellerin anlayacağı 80/42 (CICIDS/UNSW) sütunlu özniteliklere dönüştürülmesi.
-- [ ] **Modellere Besleme (Live Feed)**: Çıkarılan bu özelliklerin anlık olarak Ensemble AI modeline gönderilip tahmin skorlarının alınması.
+- [ ] **Gerçek Zamanlı Trafik Dönüşümü**: Yakalanan pcap (paket) dosyalarının canlı olarak Python içerisinde parse edilmesi ve **CICFlowMeter** benzeri bir script kullanılarak modellerin anlayacağı ortak özellik formatlarına dönüştürülmesi.
+- [ ] **Modellere Besleme (Live Feed)**: Çıkarılan bu özelliklerin anlık olarak seçilen modelimize (hız için LightGBM veya yüksek doğruluk için CNN/LSTM) gönderilip tahmin skorlarının alınması.
 
 ---
 
@@ -38,7 +38,7 @@ Bu doküman, makine öğrenmesi modelleri geliştirildikten sonra projenin **Ger
 - [ ] **Canlı Metriklerin Gösterimi**:
   - Güvenli vs. Zararlı trafik oranlarını gösteren canlı pasta/çizgi grafikleri.
   - Ağdaki paketleri ve gelen/giden IP'leri gösteren akan bir log (kayıt) ekranı.
-  - Siber saldırı tespit edildiğinde **Kırmızı Alarm (Alert)** verilmesi ve saldırı türünün ekrana yansıtılması.
+  - Siber saldırı tespit edildiğinde **Kırmızı Alarm (Alert)** verilmesi ve modelin (örn: CNN) saldırı tahmin oranının (%) ekrana yansıtılması.
 
 ---
 
@@ -54,7 +54,7 @@ graph TD
     C --> D[Özellik Çıkarımı<br>Packet to DataFrame]
     
     subgraph Yapay Zeka & İzleme (Monitoring)
-        D -->|Ağ Özellikleri| E{Ensemble AI Modeli}
+        D -->|Ağ Özellikleri| E{Seçili AI Modeli<br>CNN / LightGBM}
         E -->|Güvenli| F[Masaüstü Monitoring GUI]
         E -->|Anomali Tespit Edildi| F
         F -->|Dashboard & Alarm| G((Siber Güvenlik Uzmanı))
