@@ -5,16 +5,18 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Completed-success.svg)]()
 
-**Kapsamlı bir makine öğrenmesi projesi: 3 Dataset × 3 Temel Model = 9 Eğitilmiş Model**
+**Kapsamlı bir makine öğrenmesi araştırması: 15 Deneysel Modelden -> Optimize Edilmiş 3 Ana Modele**
 
 ---
 
-## 📋 Proje Özeti
+## 📋 Proje Özeti ve Model Seçim Hikayesi
 
-Bu proje, **3 farklı siber saldırı tespit veri seti** kullanarak siber dünya dinamiklerine en uygun olan **3 farklı makine öğrenmesi modeline (CNN, LSTM, LightGBM)** odaklanmış ve yüksek performanslı siber saldırı tespit sistemleri oluşturmuştur. Karmaşayı azaltmak ve optimum sonuçlar elde etmek adına en verimli teknolojiler seçilmiştir.
+Bu proje, siber saldırı tespiti alanında kapsamlı bir Ar-Ge çalışması olarak başlamıştır. İlk aşamada **3 farklı veri seti** (KDD Cup 1999, CICIDS2018, UNSW-NB15) üzerinde toplam **15 farklı model ve ensemble (hibrit) mimari** başarıyla eğitilip birbirleriyle kıyaslanmıştır.
+
+Projenin üretim (production) ve canlı test (real-time monitoring) aşamasına geçişinde; sistem karmaşasını azaltmak, spesifik hedeflere (hız, yüksek doğruluk ve zaman serisi analizi) net çözümler sunmak amacıyla **en başarılı 3 modelin süzülmesi (daraltılması)** kararı verilmiştir. Eski deneysel çalışmalar veri ve tecrübe olarak arşivlenirken; projenin ana mimarisi "şampiyon" seçilen **CNN, LSTM ve LightGBM** üzerine inşa edilmiştir.
 
 ### 🎯 Ana Hedef
-Güncel ve klasik boyutlu veri setleri üzerinde, farklı altyapılara (Derin Öğrenme ve Karar Ağaçları) sahip 3 ana modeli karşılaştırmak, gerçek zamanlı tespit mekanizmaları geliştirmek ve modern siber güvenlik yazılımları için taban oluşturmak.
+Güncel ve klasik boyutlu veri setleri üzerinde kanıtlanmış (ampirik metodlarla seçilmiş) 3 farklı altyapıyı (Derin Öğrenme ve Karar Ağaçları) gerçek zamanlı tespit mekanizmalarına dönüştürmek ve modern siber güvenlik izleme yazılımları için taban oluşturmak.
 
 ---
 
@@ -28,24 +30,24 @@ Güncel ve klasik boyutlu veri setleri üzerinde, farklı altyapılara (Derin Ö
 
 ---
 
-## 🤖 Geliştirilen Modeller
+## 🤖 Nihai Seçilen "Şampiyon" Modeller
 
-Her veri seti için performansları optimize edilmiş **3 farklı model türü** geliştirilmiştir:
+İlk geliştirme aşamasındaki XGBoost ve karmaşık Ensembling (toplama) testlerinden aldığımız detaylı raporlar ışığında, sistemi ileriye taşımak için alana özel **3 ana model** yetkilendirilmiştir:
 
 ### 1. CNN (Convolutional Neural Network) - *Doğruluk Lideri*
 - 🧠 Derin öğrenme mimarisi
 - 🔍 Pattern (Örüntü) tanıma yeteneği yüksek
-- 🎯 En yüksek accuracy (doğruluk) oranını sağlar
+- 🎯 Testler sonucunda modern veri setlerinde en yüksek accuracy (doğruluk) oranını sağlayan model olmuştur.
 
 ### 2. LSTM (Long Short-Term Memory) - *Analiz Lideri*
 - 🧠 Derin öğrenme (RNN varyantı)
 - 📊 Sequence-based (Zaman Serisi) yaklaşım
-- ⏱️ Ağ trafiğinin zaman içerisindeki anormalliklerini kolayca kavrar
+- ⏱️ Ağ trafiğinin zaman içerisindeki anormalliklerini kolayca kavrar, uzun vadeli güvenlik analizi için mükemmeldir.
 
 ### 3. LightGBM - *Gerçek Zamanlı (Real-Time) Hız Lideri*
 - ⚡ Gradient Boosting ağacı mantığı
-- 🚀 Çok hızlı eğitim ve tahmin süresi (milisaniyeler)
-- 💾 Hafif, düşük donanım kaynağı tüketir ve production ortamları için optimaldir.
+- 🚀 Çok hızlı eğitim ve en önemlisi **milisaniyelik tahmin süresi**
+- 💾 Hafifliğiyle aktif ağ dinleme (sniffing) aşamasında sistemi yormadan anında tepki verebilecek donanıma sahiptir.
 
 ---
 
@@ -115,16 +117,16 @@ siber_saldırı_project/
 ├── 📁 processed_data*/             # İşlenmiş veriler
 ├── 📁 lstm_data*/                  # LSTM formatına sokulmuş matrisler
 │
-├── 📁 eski_surumler_ve_testler/    # Projenin geçmişte test edilmiş diğer algoritmaları (XGBoost, Ensemble vb.)
+├── 📁 eski_surumler_ve_testler/    # İlk araştırmalardaki (XGBoost, Ensemble vb.) deneysel referanslar (ARŞİV)
 │
 ├── 📄 Veri İşleme
 │   ├── data_preprocessing*.py      # Temel makine öğrenmesi veri onarımı
 │   └── prepare_lstm_data*.py       # Derin öğrenme veri hazırlama
 │
 ├── 📄 Ana Model Eğitim Kodları
-│   ├── cnn_model*.py               # CNN Training
-│   ├── lstm_model*.py              # LSTM Training
-│   └── lightgbm_model*.py          # LightGBM Training
+│   ├── cnn_model*.py               # Seçili CNN Kodları
+│   ├── lstm_model*.py              # Seçili LSTM Kodları
+│   └── lightgbm_model*.py          # Seçili LightGBM Kodları
 │
 ├── 📚 Dokümantasyon
 │   ├── README.md                   # Bu dosya
@@ -143,8 +145,6 @@ siber_saldırı_project/
 - scikit-learn>=1.0
 - pandas>=1.3, numpy>=1.20
 - matplotlib, seaborn
-
-*(Detaylar için `requirements.txt` dosyasına bakabilirsiniz)*
 
 ---
 
