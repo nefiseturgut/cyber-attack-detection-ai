@@ -1,0 +1,103 @@
+version: "3.9"
+
+networks:
+  ids_internal_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
+
+volumes:
+  captured_pcaps:
+  logs:
+
+services:
+
+  target:
+    build:
+      context: ./target
+      dockerfile: Dockerfile
+    container_name: ids_target
+    hostname: target-machine
+    networks:
+      ids_internal_net:
+        ipv4_address: 172.20.0.10
+    ports:
+      - "8080:80"
+      - "2222:22"
+    volumes:
+      - logs:/var/log/ids_target
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+  attacker:
+    build:
+      context: ./attacker
+      dockerfile: Dockerfile
+    container_name: ids_attacker
+    hostname: attacker-machine
+    networks:
+      ids_internal_net:
+        ipv4_address: 172.20.0.20
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - logs:/var/log/ids_attacker
+    command: tail -f /dev/null
+    restart: unless-stopped
+
+  monitor:
+    build:
+      context: ./monitor
+      dockerfile: Dockerfile
+    container_name: ids_monitor
+    hostname: monitor-machine
+    networks:
+      ids_internal_net:
+        ipv4_address: 172.20.0.30
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - captured_pcaps:/app/captures
+      - logs:/app/logs
+      - ./monitor:/app
+    environment:
+      - CAPTURE_INTERFACE=eth0
+      - TARGET_IP=172.20.0.10
+      - ATTACKER_IP=172.20.0.20
+      - OUTPUT_DIR=/app/captures
+    command: python3 /app/capture.py
+    depends_on:
+      - target
+      - attacker
+    environment:
+      - CAPTURE_INTERFACE=eth0
+      - TARGET_IP=172.20.0.10
+      - ATTACKER_IP=172.20.0.20
+      - OUTPUT_DIR=/app/captures
+      - IDS_MODE=ensemble
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: ids_dashboard
+    hostname: dashboard
+    networks:
+      ids_internal_net:
+        ipv4_address: 172.20.0.40
+    ports:
+      - "8501:8501"
+    volumes:
+      - logs:/app/logs
+    environment:
+      - ALERTS_FILE=/app/logs/alerts.jsonl
+      - REFRESH_SEC=3
+    depends_on:
+      - monitor
+    restart: unless-stopped

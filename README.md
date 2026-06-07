@@ -166,3 +166,23 @@ Bitirme Projesi - 2026
 
 ## 📄 Lisans
 Bu proje akademik amaçlar için geliştirilmiştir. Uygun atıf yapılarak kullanılabilir.
+
+---
+
+## 📞 İletişim
+
+Proje hakkında sorularınız için:
+- 📧 Email: nefiseturgut60@gmail.com
+- 🔗 LinkedIn: Nefise Turgut
+- 📁 GitHub: nefiseturgut
+
+---
+
+## ⭐ Teşekkürler
+
+Bu projeyi beğendiyseniz yıldız vermeyi unutmayın! ⭐
+
+---
+  
+**Versiyon:** 2.1   
+**Durum:** ✅ Devam Ediyor
