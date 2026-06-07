@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-import os, time, logging, threading, queue, signal
+import os, time, logging, threading, queue, signal, json
 from datetime import datetime
 from pathlib import Path
 import pyshark
 from feature_extractor import FeatureExtractor
+from predictor import Predictor
 
 INTERFACE   = os.environ.get("CAPTURE_INTERFACE", "eth0")
 TARGET_IP   = os.environ.get("TARGET_IP",         "172.20.0.10")
@@ -28,9 +29,13 @@ _stop = threading.Event()
 signal.signal(signal.SIGINT,  lambda s,f: _stop.set())
 signal.signal(signal.SIGTERM, lambda s,f: _stop.set())
 
+ALERTS_FILE = Path("/app/logs/alerts.jsonl")
+IDS_MODE    = os.environ.get("IDS_MODE", "ensemble")  # ensemble | fast | accurate
+
 pkt_queue  = queue.Queue(maxsize=1000)
 extractor  = FeatureExtractor()
-stats      = {"captured": 0, "flows": 0, "errors": 0}
+predictor  = Predictor(mode=IDS_MODE)
+stats      = {"captured": 0, "flows": 0, "attacks": 0, "errors": 0}
 
 def pcap_path():
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -78,12 +83,45 @@ def process_loop():
                     df.to_csv(out, index=False)
                     stats["flows"] += len(df)
                     log.info(f"{len(df)} akis -> {out.name}")
+                    # Tahmin yap ve uyarıları kaydet
+                    try:
+                        results = predictor.predict(df)
+                        if not results.empty:
+                            attacks = results[results["is_attack"]]
+                            stats["attacks"] += len(attacks)
+                            _write_alerts(results)
+                            if not attacks.empty:
+                                log.warning(f"[ALARM] {len(attacks)} SALDIRI TESPİT EDİLDİ!")
+                    except Exception as pe:
+                        log.error(f"Tahmin hatasi: {pe}")
             except Exception as e:
                 log.error(f"Cikarim hatasi: {e}")
                 stats["errors"] += 1
             batch.clear()
             last = time.time()
-            log.info(f"[STATS] captured={stats['captured']} flows={stats['flows']} errors={stats['errors']}")
+            log.info(f"[STATS] captured={stats['captured']} flows={stats['flows']} attacks={stats['attacks']} errors={stats['errors']}")
+
+def _write_alerts(results):
+    """Her akışı alerts.jsonl dosyasına yazar (dashboard okur)."""
+    try:
+        with open(ALERTS_FILE, "a", encoding="utf-8") as f:
+            for _, row in results.iterrows():
+                record = {
+                    "ts":         datetime.now().isoformat(),
+                    "src_ip":     str(row.get("src_ip", "")),
+                    "dst_ip":     str(row.get("dst_ip", "")),
+                    "src_port":   int(row.get("src_port", 0)),
+                    "dst_port":   int(row.get("dst_port", 0)),
+                    "is_attack":  bool(row.get("is_attack", False)),
+                    "lgbm":       int(row.get("lgbm_pred", 0)),
+                    "cnn":        int(row.get("cnn_pred", 0)),
+                    "lstm":       int(row.get("lstm_pred", 0)),
+                    "mode":       str(row.get("mode", "")),
+                    "latency_ms": float(row.get("latency_ms", 0)),
+                }
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except Exception as e:
+        log.error(f"Alert yazma hatasi: {e}")
 
 log.info("=" * 50)
 log.info("  IDS Monitor Basladi")

@@ -74,4 +74,30 @@ services:
     depends_on:
       - target
       - attacker
+    environment:
+      - CAPTURE_INTERFACE=eth0
+      - TARGET_IP=172.20.0.10
+      - ATTACKER_IP=172.20.0.20
+      - OUTPUT_DIR=/app/captures
+      - IDS_MODE=ensemble
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: ids_dashboard
+    hostname: dashboard
+    networks:
+      ids_internal_net:
+        ipv4_address: 172.20.0.40
+    ports:
+      - "8501:8501"
+    volumes:
+      - logs:/app/logs
+    environment:
+      - ALERTS_FILE=/app/logs/alerts.jsonl
+      - REFRESH_SEC=3
+    depends_on:
+      - monitor
     restart: unless-stopped
