@@ -46,7 +46,9 @@ services:
       - NET_RAW
     volumes:
       - logs:/var/log/ids_attacker
-    command: tail -f /dev/null
+    environment:
+      - TARGET_IP=172.20.0.10
+      - MONITOR_IP=172.20.0.30
     restart: unless-stopped
 
   monitor:

@@ -1,5 +1,5 @@
 """
-UNSW_NB15 için LSTM Sequence Veri Hazırlama
+UNSW_NB15 için LSTM Sequence Veri Hazrlama
 """
 
 import numpy as np
@@ -19,7 +19,7 @@ def create_sequences(X, y, sequence_length=10):
 
 def main():
     print("="*80)
-    print("🔄 UNSW_NB15 - LSTM Veri Hazırlama")
+    print(" UNSW_NB15 - LSTM Veri Hazrlama")
     print("="*80)
     
     # Load processed data
@@ -29,18 +29,18 @@ def main():
     X_test = np.load(data_dir / 'X_test.npy')
     y_test = np.load(data_dir / 'y_test.npy')
     
-    print(f"\n📂 Veri yüklendi:")
+    print(f"\n Veri yüklendi:")
     print(f"   X_train: {X_train.shape}")
     print(f"   X_test: {X_test.shape}")
     
     # Create sequences
     sequence_length = 10
-    print(f"\n🔧 Sequence oluşturuluyor (length={sequence_length})...")
+    print(f"\n Sequence oluturuluyor (length={sequence_length})...")
     
     X_train_seq, y_train_seq = create_sequences(X_train, y_train, sequence_length)
     X_test_seq, y_test_seq = create_sequences(X_test, y_test, sequence_length)
     
-    print(f"\n✅ Sequence'ler oluşturuldu:")
+    print(f"\n Sequence'ler oluturuldu:")
     print(f"   X_train_seq: {X_train_seq.shape}")
     print(f"   y_train_seq: {y_train_seq.shape}")
     print(f"   X_test_seq: {X_test_seq.shape}")
@@ -63,8 +63,8 @@ def main():
     }
     np.save(output_dir / 'metadata.npy', metadata)
     
-    print(f"\n💾 Kaydedildi: {output_dir}/")
-    print("✨ UNSW LSTM verisi hazır!")
+    print(f"\n Kaydedildi: {output_dir}/")
+    print(" UNSW LSTM verisi hazr!")
 
 if __name__ == "__main__":
     main()

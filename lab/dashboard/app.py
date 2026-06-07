@@ -152,7 +152,7 @@ with col_pie:
         "Tür":   ["Normal", "Saldırı"],
         "Sayı":  [n_normal, n_attack],
     })
-    st.bar_chart(pie_data.set_index("Tür"), color=["#00c853", "#ff4b4b"])
+    st.bar_chart(pie_data.set_index("Tür"))
 
 with col_line:
     st.subheader("Akış Zaman Serisi")

@@ -110,13 +110,19 @@ class Predictor:
 
         numeric = numeric.fillna(0.0).replace([np.inf, -np.inf], 0.0)
 
-        if self.scaler:
-            try:
-                return self.scaler.transform(numeric.values)
-            except Exception as e:
-                log.warning(f"Scaler transform hatası: {e}")
-
-        return numeric.values
+        # Live trafik verisini 0-1 arasına normalize et (log scale)
+        from sklearn.preprocessing import MinMaxScaler
+        try:
+            vals = numeric.values.astype(float)
+            # Log1p normalize — ağ trafiği değerleri çok geniş aralıkta
+            vals = np.log1p(np.abs(vals))
+            col_max = vals.max(axis=0)
+            col_max[col_max == 0] = 1
+            vals = vals / col_max
+            return vals
+        except Exception as e:
+            log.warning(f"Normalize hatası: {e}")
+            return numeric.values
 
     # ── Tahmin ────────────────────────────────────────────────────────────────
 

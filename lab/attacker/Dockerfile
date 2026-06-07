@@ -15,4 +15,5 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 WORKDIR /opt/attacks
-CMD ["tail", "-f", "/dev/null"]
+COPY attacks/ /opt/attacks/
+CMD ["python3", "/opt/attacks/attack_scenarios.py"]

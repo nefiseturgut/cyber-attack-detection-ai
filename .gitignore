@@ -16,6 +16,8 @@ models/
 # Outputs & logs
 outputs/
 *.log
+*_log.txt
+preprocess_log.txt
 
 # Python cache
 __pycache__/

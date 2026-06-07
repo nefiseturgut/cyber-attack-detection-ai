@@ -123,6 +123,18 @@ def _write_alerts(results):
     except Exception as e:
         log.error(f"Alert yazma hatasi: {e}")
 
+def enable_promisc(iface):
+    """Interface'i promiscuous moda al — tüm ağ trafiğini yakala."""
+    try:
+        import subprocess
+        subprocess.run(["ip", "link", "set", iface, "promisc", "on"],
+                       check=True, capture_output=True)
+        log.info(f"Promiscuous mod aktif: {iface}")
+    except Exception as e:
+        log.warning(f"Promiscuous mod etkinleştirilemedi: {e}")
+
+enable_promisc(INTERFACE)
+
 log.info("=" * 50)
 log.info("  IDS Monitor Basladi")
 log.info(f"  Interface : {INTERFACE}")
