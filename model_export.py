@@ -33,7 +33,7 @@ except ImportError:
 # ── CNN (UNSW) ────────────────────────────────────────────────────────────────
 try:
     import tensorflow as tf
-    for candidate in ["models/cnn_model_unsw.keras", "models/cnn_model_unsw.h5"]:
+    for candidate in ["models/best_cnn_model_unsw.keras", "models/cnn_model_unsw.keras", "models/cnn_model_unsw.h5"]:
         p = Path(candidate)
         if p.exists():
             shutil.copy(p, EXPORT_DIR / ("cnn_unsw" + p.suffix))
@@ -47,7 +47,7 @@ except ImportError:
 # ── LSTM (UNSW) ───────────────────────────────────────────────────────────────
 try:
     import tensorflow as tf
-    for candidate in ["models/lstm_model_unsw.keras", "models/lstm_model_unsw.h5"]:
+    for candidate in ["models/best_lstm_model_unsw.keras", "models/lstm_model_unsw.keras", "models/lstm_model_unsw.h5"]:
         p = Path(candidate)
         if p.exists():
             shutil.copy(p, EXPORT_DIR / ("lstm_unsw" + p.suffix))

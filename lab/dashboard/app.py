@@ -198,6 +198,38 @@ st.dataframe(
     height=400,
 )
 
+# ── Sistem Logları ───────────────────────────────────────────────────────────
+st.divider()
+st.subheader("📄 Sistem Logları (capture.log)")
+
+LOG_FILE = Path(os.environ.get("ALERTS_FILE", "/app/logs/alerts.jsonl")).parent / "capture.log"
+
+@st.cache_data(ttl=REFRESH_SEC)
+def load_logs(path: str) -> list:
+    p = Path(path)
+    if not p.exists():
+        return []
+    lines = p.read_text(encoding="utf-8", errors="ignore").splitlines()
+    return lines[-100:]  # Son 100 satır
+
+log_lines = load_logs(str(LOG_FILE))
+
+if log_lines:
+    # Renklendirme: WARNING kırmızı, INFO yeşil
+    colored = []
+    for line in reversed(log_lines):
+        if "[WARNING]" in line or "ALARM" in line:
+            colored.append(f":red[{line}]")
+        elif "[ERROR]" in line:
+            colored.append(f":red[{line}]")
+        elif "yüklendi" in line or "hazır" in line or "SUCCESS" in line:
+            colored.append(f":green[{line}]")
+        else:
+            colored.append(line)
+    st.code("\n".join(log_lines[-50:]), language="log")
+else:
+    st.info("capture.log henüz oluşmadı.")
+
 # ── Otomatik yenileme ─────────────────────────────────────────────────────────
 time.sleep(refresh)
 st.rerun()

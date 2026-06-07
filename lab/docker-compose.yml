@@ -65,11 +65,6 @@ services:
       - captured_pcaps:/app/captures
       - logs:/app/logs
       - ./monitor:/app
-    environment:
-      - CAPTURE_INTERFACE=eth0
-      - TARGET_IP=172.20.0.10
-      - ATTACKER_IP=172.20.0.20
-      - OUTPUT_DIR=/app/captures
     command: python3 /app/capture.py
     depends_on:
       - target
