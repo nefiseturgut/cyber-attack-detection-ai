@@ -117,6 +117,7 @@ services:
       - "8501:8501"
     volumes:
       - logs:/app/logs
+      - ./dashboard:/app
     environment:
       - ALERTS_FILE=/app/logs/alerts.jsonl
       - REFRESH_SEC=3

@@ -25,6 +25,7 @@ st.set_page_config(
 ALERTS_FILE  = Path(os.environ.get("ALERTS_FILE", "/app/logs/alerts.jsonl"))
 REFRESH_SEC  = int(os.environ.get("REFRESH_SEC", "3"))
 MAX_ROWS     = 500   # bellekte tutulacak maksimum kayıt
+MODE_FILE    = Path(os.environ.get("ALERTS_FILE", "/app/logs/alerts.jsonl")).parent / "ids_mode.txt"
 
 # ── CSS ───────────────────────────────────────────────────────────────────────
 st.markdown("""
@@ -76,6 +77,36 @@ with st.sidebar:
     refresh = st.slider("Yenileme aralığı (sn)", 1, 30, REFRESH_SEC)
     time_window = st.selectbox("Zaman penceresi", ["Son 5 dk", "Son 15 dk", "Son 1 saat", "Tümü"], index=0)
     show_only_attacks = st.toggle("Yalnızca saldırıları göster", value=False)
+
+    st.divider()
+    st.subheader("🤖 Model Modu")
+
+    # Mevcut modu dosyadan oku
+    current_mode = "ensemble"
+    if MODE_FILE.exists():
+        current_mode = MODE_FILE.read_text().strip()
+
+    mode_labels = {
+        "ensemble": "🔗 Ensemble (CNN + LSTM + LightGBM)",
+        "fast":     "⚡ Fast (Yalnızca LightGBM)",
+        "accurate": "🎯 Accurate (Yalnızca CNN)",
+    }
+    selected_mode = st.radio(
+        "Tahmin modu seç:",
+        options=list(mode_labels.keys()),
+        format_func=lambda x: mode_labels[x],
+        index=list(mode_labels.keys()).index(current_mode),
+    )
+    if selected_mode != current_mode:
+        MODE_FILE.write_text(selected_mode)
+        st.success(f"Mod değiştirildi → {selected_mode}")
+
+    mode_desc = {
+        "ensemble": "3 model oylaması — en yüksek güvenilirlik",
+        "fast":     "< 1ms gecikme — yüksek trafikli ortamlar için",
+        "accurate": "En yüksek bireysel doğruluk (%98.55)",
+    }
+    st.caption(f"ℹ️ {mode_desc[selected_mode]}")
 
     st.divider()
     st.caption(f"📁 Log: `{ALERTS_FILE}`")

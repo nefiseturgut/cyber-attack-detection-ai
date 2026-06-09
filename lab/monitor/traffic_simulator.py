@@ -36,6 +36,21 @@ ALERTS_FILE = Path(os.environ.get("ALERTS_FILE", "/app/logs/alerts.jsonl"))
 IDS_MODE    = os.environ.get("IDS_MODE", "ensemble")
 BATCH_SIZE  = int(os.environ.get("BATCH_SIZE", "12"))   # Her seferinde kaç kayıt
 BATCH_DELAY = float(os.environ.get("BATCH_DELAY", "4")) # Saniye cinsinden bekleme
+MODE_FILE   = ALERTS_FILE.parent / "ids_mode.txt"       # Dashboard'dan mod seçimi
+
+
+def get_current_mode(predictor) -> str:
+    """Dashboard'dan mod değişikliği var mı kontrol et."""
+    try:
+        if MODE_FILE.exists():
+            mode = MODE_FILE.read_text().strip()
+            if mode in ("ensemble", "fast", "accurate") and mode != predictor.mode:
+                predictor.switch_mode(mode)
+                log.info(f"Mod guncellendi: {mode}")
+            return mode
+    except Exception:
+        pass
+    return predictor.mode
 
 # Gerçekçi IP havuzu
 INTERNAL_IPS = [
@@ -177,6 +192,9 @@ def simulate(df: pd.DataFrame, label_col: str, predictor: Predictor):
 
         # Feature DataFrame olustur
         feat_df = build_feature_df(batch_rows, label_col)
+
+        # Dashboard'dan mod değişikliği kontrol et
+        get_current_mode(predictor)
 
         # Tahmin yap
         try:
