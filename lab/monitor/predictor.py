@@ -181,7 +181,12 @@ class Predictor:
         if model is None:
             return None
         try:
-            inp = X.reshape(len(X), X.shape[1], 1) if name == "CNN" else X.reshape(len(X), 1, X.shape[1])
+            if name == "CNN":
+                # CNN modeli (n, 10, 42) bekliyor — her feature vektörünü 10 kez tekrarla
+                inp = np.repeat(X[:, np.newaxis, :], 10, axis=1)  # (batch, 10, 42)
+            else:
+                # LSTM (batch, 1, 42)
+                inp = X.reshape(len(X), 1, X.shape[1])
             proba = model.predict(inp, verbose=0).flatten()
             return (proba >= 0.5).astype(int)
         except Exception as e:

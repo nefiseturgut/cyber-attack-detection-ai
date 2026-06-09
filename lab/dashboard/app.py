@@ -184,7 +184,7 @@ if all(c in df.columns for c in ["lgbm", "cnn", "lstm"]):
 # ── Canlı log tablosu ─────────────────────────────────────────────────────────
 st.subheader("📋 Son Akışlar")
 display_cols = [c for c in ["ts", "src_ip", "dst_ip", "src_port", "dst_port",
-                             "is_attack", "lgbm", "cnn", "lstm", "mode", "latency_ms"]
+                             "is_attack", "true_label", "lgbm", "cnn", "lstm", "mode", "latency_ms"]
                 if c in df.columns]
 log_df = df[display_cols].tail(50).sort_values("ts", ascending=False)
 

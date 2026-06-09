@@ -11,6 +11,7 @@ networks:
 volumes:
   captured_pcaps:
   logs:
+  dataset:
 
 services:
 
@@ -77,6 +78,30 @@ services:
       - ATTACKER_IP=172.20.0.20
       - OUTPUT_DIR=/app/captures
       - IDS_MODE=ensemble
+    restart: unless-stopped
+
+  simulator:
+    build:
+      context: ./monitor
+      dockerfile: Dockerfile
+    container_name: ids_simulator
+    hostname: simulator
+    networks:
+      ids_internal_net:
+        ipv4_address: 172.20.0.50
+    volumes:
+      - logs:/app/logs
+      - ./monitor:/app
+      - ../datasets/UNSW_NB15:/app/data:ro
+    environment:
+      - DATASET_CSV=/app/data/UNSW_NB15_testing-set.csv
+      - ALERTS_FILE=/app/logs/alerts.jsonl
+      - IDS_MODE=ensemble
+      - BATCH_SIZE=12
+      - BATCH_DELAY=4
+    command: python3 /app/traffic_simulator.py
+    depends_on:
+      - monitor
     restart: unless-stopped
 
   dashboard:
